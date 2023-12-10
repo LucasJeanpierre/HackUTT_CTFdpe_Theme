@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="jumbotron">
+    <div class="container">
+      <h1 class="challenges-title">
+        {% trans %}Challenges{% endtrans %}
+      </h1>
+    </div>
+  </div>
+
+  <span id="fire_rope"></span>
+
+  <div id="fire_animation">
+    {% for i in range(1, 50) %}
+      <span class="particle"></span>
+    {% endfor %}
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        {% include "components/errors.html" %}
+      </div>
+    </div>
+
+    <div 
+      x-data="ChallengeBoard" 
+      @load-challenges.window="loadChallenges()" 
+      @load-challenge.window="loadChallenge($event.detail)"
+    >
+      <div
+          x-ref="challengeWindow" id="challenge-window" class="modal fade" tabindex="-1" role="dialog" x-data=""
+          x-html="$store.challenge.data.view"
+      ></div>
+
+      <div x-show="!loaded">
+        <div class="min-vh-50 d-flex align-items-center">
+          <div class="text-center w-100">
+            <i class="fas fa-circle-notch fa-spin fa-3x fa-fw spinner"></i>
+          </div>
+        </div>
+      </div>
+
+      <div x-show="loaded">
+        <template x-for="(category, idx) in getCategories()" :key="idx">
+          <div class="pt-5" :class="category">
+            <div class="category-header mb-3">
+              <h3 x-text="category" class="text-white"></h3>
+            </div>
+
+            <div class="category-challenges d-flex flex-column">
+              <div class="challenges-row row">
+                <template x-for="(c, idx) in getChallenges(category)" :key="c.id">
+                  <div class="col-sm-6 col-md-4 col-lg-3" :class="category">
+                    <button
+                        class="challenge-button btn btn-dark w-100 text-truncate my-3"
+                        :class="c.solved_by_me ? 'challenge-solved' : ''"
+                        :value="c.id" @click="loadChallenge(c.id)"
+                    >
+                      <div class="challenge-inner my-3">
+                        <p x-text="c.name"></p>
+                          <span x-text="c.value" :class="c.value == 0 ? 'shortcut_zero' : ''"></span>
+                      </div>
+                    </button>
+                  </div>
+                </template>
+              </div>
+            </div>
+          </div>
+        </template>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+
+{% block scripts %}
+  {{ Assets.js("assets/js/challenges.js") }}
+
+  <script>
+
+    const begin = {{ Configs.start }};
+    const end = {{ Configs.end }};
+
+    function updateFireRope() {
+      if (begin === 0 || end === 0) {
+        setFireRopePosition(100);
+        return;
+      }
+      const beginDate = new Date(begin * 1000);
+      const endDate = new Date(end * 1000);
+
+      const now = new Date();
+
+      if (now < beginDate) {
+        setFireRopePosition(100);
+        document.getElementById("fire_animation").style.display = "none";
+        return;
+      }
+
+      if (now > endDate) {
+        setFireRopePosition(0);
+        document.getElementById("fire_animation").style.display = "none";
+        return;
+      }
+
+      document.getElementById("fire_animation").style.display = "block";
+
+      const total = endDate - beginDate;
+
+      const elapsed = now - beginDate;
+
+      const min = 1.5;
+      const max = 98.5;
+      const percentRange = max - min;
+      const percent = 100 - (min + (elapsed / total) * percentRange);
+  
+
+      setFireRopePosition(percent);
+    }
+
+
+
+    function setFireRopePosition(position) {
+      const rope = document.getElementById("fire_rope");
+      const animation = document.getElementById("fire_animation");
+
+      if (rope && animation) {
+        rope.style.width = `${position}%`;
+        animation.style.left = `calc(${position}% - 30px)`;
+      }
+
+    }
+
+    // update every 10 seconds
+    updateFireRope();
+    setInterval(updateFireRope, 10000);
+  </script>
+{% endblock %}

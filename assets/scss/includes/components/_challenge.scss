@@ -1,0 +1,90 @@
+/* Challenge styles
+-------------------------------------------------- */
+
+$purple: #b90db9;
+
+.challenge-desc {
+  overflow-wrap: anywhere;
+
+  img {
+    max-width: 100%;
+  }
+}
+
+.challenge-button {
+  box-shadow: 3px 3px 3px var(--bs-secondary);
+}
+
+.challenge-button:hover {
+  background-color: $purple;
+  color: white;
+  border-color: $purple;
+}
+
+.challenge-button p {
+  white-space: normal;
+}
+
+.challenge-submit:hover {
+  background-color: $purple;
+  border-color: $purple;
+}
+
+
+.challenge-solved {
+  background-color: $purple;
+  border: none;
+}
+
+.challenge-solved:hover {
+  background-color: $purple;
+  border-color: $purple;
+}
+
+.form-control:focus {
+  border-color: $purple !important;
+  box-shadow: 0 0 0 .1rem $purple !important;
+}
+
+#challenge .alert-success {
+  background-color: $purple !important;
+  border-color: $purple !important;
+  color: #000;
+}
+
+#challenge .form-control:focus {
+  color: white; 
+}
+
+.challenge-input {
+  background-color: transparent !important;
+}
+
+.challenge-name {
+  color: $purple;
+  font-weight: bold;
+}
+
+.modal .nav-link {
+  color: $purple !important;
+}
+
+.modal .nav-link.active {
+  color: black !important;
+}
+
+.modal .table-dark {
+  --bs-table-bg: #00000000;
+}
+
+.challenge-button {
+  height: 80%;
+}
+
+.Shortcut .shortcut_zero {
+  display: none;
+}
+
+#challenge-solves-names tr td:nth-child(odd) a {
+  color: $purple;
+}

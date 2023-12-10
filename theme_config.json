@@ -1,0 +1,6 @@
+{
+    "challenge_window_size": "norm",
+    "challenge_category_order": "function compare(a, b) {\r\n    const Order = {\r\n        'Intro': 1,\r\n        'Voie Enquete': 2,\r\n        'Shortcut Enquete': 3,\r\n        'Voie Voyage': 4,\r\n        'Shortcut Voyage': 5,\r\n        'Bonus': 6,\r\n    };\r\n    \r\n    const getIndex = (a) => {\r\n        for (const key in Order) {\r\n            if (a.includes(key)) {\r\n                return Order[key];\r\n            }\r\n        }\r\n        return 7;\r\n    }\r\n\r\n    if (getIndex(a) < getIndex(b)) {\r\n        return -1;\r\n    }\r\n    if (getIndex(a) > getIndex(b)) {\r\n        return 1;\r\n    }\r\n    return 0;\r\n}",
+    "challenge_order": "function compare(a, b) {\r\n    const getIndex = (a) => parseFloat(a.name.substring(a.name.indexOf('[') + 1, a.name.indexOf('/')));\r\n    if (getIndex(a) < getIndex(b)) {\r\n        return -1;\r\n    }\r\n    if (getIndex(a) > getIndex(b)) {\r\n        return 1;\r\n    }\r\n    return 0;\r\n}",
+    "use_builtin_code_highlighter": true
+  }
