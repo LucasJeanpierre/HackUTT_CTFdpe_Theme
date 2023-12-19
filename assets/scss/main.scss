@@ -27,13 +27,18 @@
   src: url("/themes/HackUTT_CTFdpe_Theme/static/fonts/BackToTheFuture/BTTF.ttf");
 }
 
+@font-face {
+  font-family: MeltedMonster;
+  src: url("/themes/HackUTT_CTFdpe_Theme/static/fonts/MeltedMonster/MeltedMonster.ttf");
+}
 
-$purple: #b90db9;
+
+$purple: #b35bb3;
 
 .challenges-title, .category-header {
   font-weight: 500;
   letter-spacing: 2px;
-  font-family: BackToTheFuture;
+  font-family: MeltedMonster;
 }
 
 a {
@@ -100,7 +105,7 @@ select.form-control {
 
 
 body {
-  background-image :url("/themes/HackUTT_CTFdpe_Theme/static/img/background_blur.png");
+  background-image :url("/themes/HackUTT_CTFdpe_Theme/static/img/background_blur.jpg");
   background-size:cover;
   background-position:center;
   background-repeat: no-repeat;
@@ -129,7 +134,7 @@ body {
 
 
 
-$fireColor: rgb(70, 16, 67);
+$fireColor: rgb(55, 52, 132);
 $fireColorT: rgba(255,80,0,0);
 $dur: 1s;
 $blur: 0.02em;
@@ -219,7 +224,7 @@ $partSize: 5em;
 }
 
 .navbar-brand {
-  font-family: BackToTheFuture;
+  font-family: MeltedMonster;
   color: $purple !important;;
 }
 
@@ -241,15 +246,15 @@ details p {
 }
 
 details:hover {
-  border:1px solid #edb750;
+  border:1px solid $purple;
   color: white;
-  background-color: #edb750;
+  background-color: $purple;
   text-align:center;
   padding:10px;
 }
 
 .page-title {
-  font-family: BackToTheFuture;
+  font-family: MeltedMonster;
   color: $purple;
 }
 
